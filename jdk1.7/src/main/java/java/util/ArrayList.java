@@ -66,7 +66,7 @@ package java.util;
  * unsynchronized access to the list:<pre>
  *   List list = Collections.synchronizedList(new ArrayList(...));</pre>
  *
- * <p><a name="fail-fast"/>
+ * <p><a name="fail-fast"/>这里有listIterator用法
  * The iterators returned by this class's {@link #iterator() iterator} and
  * {@link #listIterator(int) listIterator} methods are <em>fail-fast</em>:
  * if the list is structurally modified at any time after the iterator is
@@ -126,7 +126,7 @@ public class ArrayList<E> extends AbstractList<E>
      */
     public ArrayList(int initialCapacity) {
         super();
-        if (initialCapacity < 0)
+        if (initialCapacity < 0)//如果用户初始化大小小于0抛异常，否则新建一个用户初始值大小的object数组。
             throw new IllegalArgumentException("Illegal Capacity: "+
                                                initialCapacity);
         this.elementData = new Object[initialCapacity];
@@ -136,7 +136,7 @@ public class ArrayList<E> extends AbstractList<E>
      * Constructs an empty list with an initial capacity of ten.
      */
     public ArrayList() {
-        this(10);
+        this(10);//调用ArrayList(10) 默认初始化一个大小为10的object数组。
     }
 
     /**
@@ -150,7 +150,7 @@ public class ArrayList<E> extends AbstractList<E>
     public ArrayList(Collection<? extends E> c) {
         elementData = c.toArray();
         size = elementData.length;
-        // c.toArray might (incorrectly) not return Object[] (see 6260652)
+        // c.toArray might (incorrectly) not return Object[] (see 6260652)// 当c.toArray返回的不是object类型的数组时，进行下面转化。
         if (elementData.getClass() != Object[].class)
             elementData = Arrays.copyOf(elementData, size, Object[].class);
     }
@@ -158,7 +158,7 @@ public class ArrayList<E> extends AbstractList<E>
     /**
      * Trims the capacity of this <tt>ArrayList</tt> instance to be the
      * list's current size.  An application can use this operation to minimize
-     * the storage of an <tt>ArrayList</tt> instance.
+     * the storage of an <tt>ArrayList</tt> instance. 由于elementData的长度会被拓展，size标记的是其中包含的元素的个数。所以会出现size很小但elementData.length很大的情况，将出现空间的浪费。trimToSize将返回一个新的数组给elementData，元素内容保持不变，length和size相同，节省空间。
      */
     public void trimToSize() {
         modCount++;
@@ -172,7 +172,7 @@ public class ArrayList<E> extends AbstractList<E>
      * Increases the capacity of this <tt>ArrayList</tt> instance, if
      * necessary, to ensure that it can hold at least the number of elements
      * specified by the minimum capacity argument.
-     *
+     *应用程序也可以使用ensureCapacity操作来增加ArrayList实例的容量，这可以减少递增式再分配的数量。 elementData.length=容量
      * @param   minCapacity   the desired minimum capacity
      */
     public void ensureCapacity(int minCapacity) {

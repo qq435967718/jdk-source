@@ -1,4 +1,4 @@
-package online.limingming.jdk.jdk1.;
+package online.limingming.jdk.jdk1;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -8,11 +8,11 @@
  */
 package java1.util.list;
 
+import org.junit.Test;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.junit.Test;
 
 /**
  * @author xiaofan
